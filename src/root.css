@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
+
+:root {
+  --darkBlue/*(Dark Mode Elements)*/: hsl(209, 23%, 22%);
+  --veryDarkBlue/*(Dark Mode Background)*/: hsl(207, 26%, 17%);
+  --veryDarkBlue/*(Light Mode Text)*/: hsl(200, 15%, 8%);
+  --darkGray/*(Light Mode Input)*/: hsl(0, 0%, 52%);
+  --veryLightGray/*(Light Mode Background)*/: hsl(0, 0%, 98%);
+  --white/*(Dark Mode Text & Light Mode Elements)*/: hsl(0, 0%, 100%);
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.header_nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+.nav_title {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.nav_mode {
+  font-size: 14px;
+}
+
+.header_inputs {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.inputs_search {
+  width: 30vw;
+  padding: 5px 10px;
+}
+
+.inputs_selection {
+  padding: 5px 10px;
+}
+
+.main_cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  gap: 50px;
+  justify-content: center;
+  min-height: 1300px;
+  height: 100%;
+}

@@ -1,0 +1,40 @@
+.componentContainer {
+  display: flex;
+  flex-flow: column;
+  gap: 15px;
+  width: 200px;
+  height: 280px;
+  border-radius: 5px;
+}
+
+.componentContainer:hover {
+  filter: drop-shadow(black 2px 6px 3px);
+}
+
+.componentContainer_flag {
+  background-size: contain;
+  max-height: 120px;
+  height: 100%;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.componentContainer_info {
+  padding: 0px 20px 20px;
+  display: flex;
+  flex-flow: column;
+  gap: 15px;
+}
+
+.info_Text {
+  display: block;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.info_name {
+  font-weight: 800;
+}
+
+strong {
+  font-weight: 600;
+}
