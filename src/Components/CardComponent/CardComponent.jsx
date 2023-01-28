@@ -7,6 +7,7 @@ const CardComponent = ({
   name,
   image,
   darkMode,
+  dataFunction,
 }) => {
   const typeMode = {
     darkMode: {
@@ -19,6 +20,10 @@ const CardComponent = ({
       color: "black",
       filter: "drop-shadow(gray 2px 6px 3px)",
     },
+  };
+
+  const dataHandler = (data) => {
+    dataFunction(data);
   };
 
   return (
@@ -79,6 +84,25 @@ const CardComponent = ({
           </span>
         </div>
       </div>
+
+      <button
+        onClick={() => {
+          console.log(name);
+          dataHandler(name);
+        }}
+        style={{
+          backgroundColor: "green",
+          padding: "2px",
+          borderRadius: "5px",
+          width: "80px",
+          textAlign: "center",
+          margin: "0px auto",
+          color: "white",
+          border: "0px solid white",
+        }}
+      >
+        More info
+      </button>
     </div>
   );
 };

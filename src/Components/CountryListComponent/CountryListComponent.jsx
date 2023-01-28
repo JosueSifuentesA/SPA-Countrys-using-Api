@@ -24,6 +24,8 @@ const CountryListComponent = () => {
   const [countryList, setCountryList] = useState();
   const [region, setRegion] = useState();
   const [nameCountry, setNameCountry] = useState();
+  const [dataName, setDataName] = useState();
+  const [notFound, setNotFound] = useState(false);
 
   const [darkStyle, setDarkStyle] = useState(true);
   const [darkIcon, setDarkIcon] = useState(true);
@@ -37,7 +39,8 @@ const CountryListComponent = () => {
         setCountryList(data);
       })
       .catch((err) => {
-        console.log("ERROR API NOT FOUND" + err);
+        console.log("ERROR API NOT FOUND " + err);
+        setNotFound(true);
       });
   };
 
@@ -71,6 +74,17 @@ const CountryListComponent = () => {
   useEffect(() => {
     handleIcons();
   }, [darkIcon]);
+
+  useEffect(() => {
+    console.log("rendered");
+  }, [countryList]);
+
+  const dataReciever = (data) => {
+    setDataName(data);
+    setModule(moduleTwo);
+    //console.log(dataName);
+  };
+
   return (
     <>
       <header
@@ -165,7 +179,8 @@ const CountryListComponent = () => {
           </select>
         </section>
       </header>
-      {countryList && (
+
+      {countryList && notFound == false && (
         <div
           className="main_cardContainer"
           style={
@@ -183,6 +198,7 @@ const CountryListComponent = () => {
           {countryList.map((module, index) => {
             return (
               <CardComponent
+                dataFunction={dataReciever}
                 key={`component_${index}`}
                 darkMode={darkStyle}
                 image={module.flags.png}
@@ -195,6 +211,8 @@ const CountryListComponent = () => {
           })}
         </div>
       )}
+
+      {notFound == true && <h1>Pais no encontrado</h1>}
     </>
   );
 };
