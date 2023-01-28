@@ -212,7 +212,34 @@ const CountryListComponent = () => {
         </div>
       )}
 
-      {notFound == true && <h1>Pais no encontrado</h1>}
+      {notFound == true && (
+        <div
+          className="main_cardContainer"
+          style={
+            darkStyle == true
+              ? {
+                  backgroundColor: typeMode.darkMode.backgroundColor,
+                }
+              : {
+                  backgroundColor: typeMode.lightMode.backgroundColor,
+                }
+          }
+        >
+          <h1
+            style={
+              darkStyle == true
+                ? {
+                    color: typeMode.darkMode.color,
+                  }
+                : {
+                    color: typeMode.lightMode.color,
+                  }
+            }
+          >
+            Pais no encontrado
+          </h1>
+        </div>
+      )}
     </>
   );
 };
