@@ -5,10 +5,15 @@
   width: 200px;
   height: 280px;
   border-radius: 5px;
+  position: relative;
+  bottom: 0px;
 }
 
 .componentContainer:hover {
-  filter: drop-shadow(black 2px 6px 3px);
+  filter: drop-shadow(rgba(0, 0, 0, 0.233) 2px 16px 5px);
+  position: relative;
+  bottom: 10px;
+  transition: filter 1s 0s, bottom 0.5s 0s;
 }
 
 .componentContainer_flag {

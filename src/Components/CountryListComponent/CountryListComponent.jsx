@@ -1,6 +1,8 @@
 import "../../root.css";
 import { useEffect, useState } from "react";
 import CardComponent from "../CardComponent/CardComponent";
+import iconMoon from "../../assets/moon.svg";
+import iconSun from "../../assets/sun.svg";
 
 const CountryListComponent = () => {
   const typeMode = {
@@ -24,6 +26,9 @@ const CountryListComponent = () => {
   const [nameCountry, setNameCountry] = useState();
 
   const [darkStyle, setDarkStyle] = useState(true);
+  const [darkIcon, setDarkIcon] = useState(true);
+  const [iconSelected, setIconSelected] = useState(iconMoon);
+  const [styleModeText, setStyleModeText] = useState("Light Mode");
 
   const callApi = (url) => {
     fetch(url)
@@ -53,6 +58,19 @@ const CountryListComponent = () => {
     callApi(`https://restcountries.com/v3.1/name/${nameCountry}`);
   }, [nameCountry]);
 
+  const handleIcons = () => {
+    if (darkIcon == true) {
+      setIconSelected(iconSun);
+      setStyleModeText("Light Mode");
+    } else {
+      setIconSelected(iconMoon);
+      setStyleModeText("Dark Mode");
+    }
+  };
+
+  useEffect(() => {
+    handleIcons();
+  }, [darkIcon]);
   return (
     <>
       <header
@@ -81,19 +99,23 @@ const CountryListComponent = () => {
           >
             Where in the world?
           </label>
-          <label
-            onClick={() => {
-              setDarkStyle(!darkStyle);
-            }}
-            className="nav_mode"
-            style={
-              darkStyle == true
-                ? { color: typeMode.darkMode.color }
-                : { color: typeMode.lightMode.color }
-            }
-          >
-            Dark Mode
-          </label>
+          <div style={{ display: "flex", gap: "5px" }}>
+            <img style={{ width: "20px", height: "20px" }} src={iconSelected} />
+            <label
+              onClick={() => {
+                setDarkStyle(!darkStyle);
+                setDarkIcon(!darkIcon);
+              }}
+              className="nav_mode"
+              style={
+                darkStyle == true
+                  ? { color: typeMode.darkMode.color }
+                  : { color: typeMode.lightMode.color }
+              }
+            >
+              {styleModeText}
+            </label>
+          </div>
         </nav>
 
         <section className="header_inputs">
