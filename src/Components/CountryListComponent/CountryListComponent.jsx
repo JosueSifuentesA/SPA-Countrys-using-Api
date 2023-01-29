@@ -26,6 +26,7 @@ const CountryListComponent = () => {
   const [nameCountry, setNameCountry] = useState();
   const [dataName, setDataName] = useState();
   const [notFound, setNotFound] = useState(false);
+  const [error, setError] = useState("");
 
   const [darkStyle, setDarkStyle] = useState(true);
   const [darkIcon, setDarkIcon] = useState(true);
@@ -41,6 +42,7 @@ const CountryListComponent = () => {
       .catch((err) => {
         console.log("ERROR API NOT FOUND " + err);
         setNotFound(true);
+        console.log(err.message);
       });
   };
 
@@ -230,9 +232,13 @@ const CountryListComponent = () => {
               darkStyle == true
                 ? {
                     color: typeMode.darkMode.color,
+                    position: "relative",
+                    top: "20vh",
                   }
                 : {
                     color: typeMode.lightMode.color,
+                    position: "relative",
+                    top: "20vh",
                   }
             }
           >
