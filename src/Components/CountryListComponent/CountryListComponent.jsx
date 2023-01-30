@@ -25,7 +25,7 @@ const CountryListComponent = () => {
   const [countryList, setCountryList] = useState();
   const [region, setRegion] = useState();
   const [nameCountry, setNameCountry] = useState();
-  const [dataName, setDataName] = useState();
+  //const [dataName, setDataName] = useState();
   const [notFound, setNotFound] = useState(false);
   const [componentSelected, setComponentSelected] = useState(false);
 
@@ -88,7 +88,7 @@ const CountryListComponent = () => {
   }, [countryList]);
 
   const dataReciever = (data) => {
-    setDataName(data);
+    //setDataName(data);
     console.log(data);
     callApi(`https://restcountries.com/v3.1/name/${data}`);
     setComponentSelected(true);
