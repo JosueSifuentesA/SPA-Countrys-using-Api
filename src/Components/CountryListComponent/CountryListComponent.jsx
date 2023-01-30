@@ -5,27 +5,25 @@ import iconMoon from "../../assets/moon.svg";
 import iconSun from "../../assets/sun.svg";
 import CountryDetailComponent from "../CountryDetailComponent/CountryDetailComponent";
 
+const typeMode = {
+  darkMode: {
+    backgroundColor: "hsl(207, 26%, 17%)",
+    color: "white",
+    backgroundColorNav: "hsl(209, 23%, 22%)",
+  },
+  lightMode: {
+    backgroundColor: "hsl(0, 0%, 96%)",
+    color: "black",
+    backgroundColorNav: "white",
+  },
+};
+const URL_API_ALLCOUNTRYS = "https://restcountries.com/v3.1/all";
+const URL_API_REGIONS = `https://restcountries.com/v3.1/region/`;
+
 const CountryListComponent = () => {
-  const typeMode = {
-    darkMode: {
-      backgroundColor: "hsl(207, 26%, 17%)",
-      color: "white",
-      backgroundColorNav: "hsl(209, 23%, 22%)",
-    },
-    lightMode: {
-      backgroundColor: "hsl(0, 0%, 96%)",
-      color: "black",
-      backgroundColorNav: "white",
-    },
-  };
-
-  const URL_API_ALLCOUNTRYS = "https://restcountries.com/v3.1/all";
-  const URL_API_REGIONS = `https://restcountries.com/v3.1/region/`;
-
   const [countryList, setCountryList] = useState();
   const [region, setRegion] = useState();
   const [nameCountry, setNameCountry] = useState();
-  //const [dataName, setDataName] = useState();
   const [notFound, setNotFound] = useState(false);
   const [componentSelected, setComponentSelected] = useState(false);
 
@@ -44,11 +42,6 @@ const CountryListComponent = () => {
           setNotFound(false);
           setCountryList(data);
         }
-      })
-      .catch((err) => {
-        console.log("ERROR API NOT FOUND " + err);
-        setNotFound(true);
-        console.log(err.message);
       });
   };
 
@@ -83,12 +76,7 @@ const CountryListComponent = () => {
     handleIcons();
   }, [darkIcon]);
 
-  useEffect(() => {
-    console.log("rendered");
-  }, [countryList]);
-
   const dataReciever = (data) => {
-    //setDataName(data);
     console.log(data);
     callApi(`https://restcountries.com/v3.1/name/${data}`);
     setComponentSelected(true);

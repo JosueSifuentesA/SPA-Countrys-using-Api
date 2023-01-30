@@ -26,8 +26,10 @@
 }
 
 .data_flag {
-  height: 350px;
+  height: 30vh;
   max-width: 450px;
+  width: 80vw;
+  max-height: 350px;
 }
 
 .detailSection_button {
@@ -44,4 +46,11 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+@media (max-width: 1000px) {
+  .detailSection_data {
+    flex-flow: column;
+    align-items: center;
+  }
 }
