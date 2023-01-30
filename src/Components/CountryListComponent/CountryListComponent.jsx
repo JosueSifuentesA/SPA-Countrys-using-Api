@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import CardComponent from "../CardComponent/CardComponent";
 import iconMoon from "../../assets/moon.svg";
 import iconSun from "../../assets/sun.svg";
+import CountryDetailComponent from "../CountryDetailComponent/CountryDetailComponent";
 
 const CountryListComponent = () => {
   const typeMode = {
@@ -24,9 +25,8 @@ const CountryListComponent = () => {
   const [countryList, setCountryList] = useState();
   const [region, setRegion] = useState();
   const [nameCountry, setNameCountry] = useState();
-  const [dataName, setDataName] = useState();
   const [notFound, setNotFound] = useState(false);
-  const [error, setError] = useState("");
+  const [componentSelected, setComponentSelected] = useState(false);
 
   const [darkStyle, setDarkStyle] = useState(true);
   const [darkIcon, setDarkIcon] = useState(true);
@@ -37,7 +37,12 @@ const CountryListComponent = () => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        setCountryList(data);
+        if (data?.status === 404) {
+          setNotFound(true);
+        } else {
+          setNotFound(false);
+          setCountryList(data);
+        }
       })
       .catch((err) => {
         console.log("ERROR API NOT FOUND " + err);
@@ -83,8 +88,14 @@ const CountryListComponent = () => {
 
   const dataReciever = (data) => {
     setDataName(data);
-    setModule(moduleTwo);
-    //console.log(dataName);
+    console.log(data);
+    callApi(`https://restcountries.com/v3.1/name/${data}`);
+    setComponentSelected(true);
+  };
+
+  const recieveBackEvent = (data) => {
+    callApi(URL_API_ALLCOUNTRYS);
+    setComponentSelected(data);
   };
 
   return (
@@ -133,85 +144,94 @@ const CountryListComponent = () => {
             </label>
           </div>
         </nav>
-
-        <section className="header_inputs">
-          <input
-            onChange={(e) => {
-              setNameCountry(e.target.value);
-            }}
-            className="inputs_search"
-            style={
-              darkStyle == true
-                ? {
-                    backgroundColor: typeMode.darkMode.backgroundColor,
-                    color: typeMode.darkMode.color,
-                  }
-                : {
-                    backgroundColor: typeMode.lightMode.backgroundColor,
-                    color: typeMode.lightMode.color,
-                  }
-            }
-            type="text"
-            placeholder="Search for country..."
-          />
-          <select
-            className="inputs_selection"
-            style={
-              darkStyle == true
-                ? {
-                    backgroundColor: typeMode.darkMode.backgroundColor,
-                    color: typeMode.darkMode.color,
-                  }
-                : {
-                    backgroundColor: typeMode.lightMode.backgroundColor,
-                    color: typeMode.lightMode.color,
-                  }
-            }
-            name="Region"
-            onChange={(e) => {
-              setRegion(e.target.value);
-            }}
-          >
-            <option>Filter by region</option>
-            <option value="africa">Africa</option>
-            <option value="america">America</option>
-            <option value="asia">Asia</option>
-            <option value="europe">Europe</option>
-            <option value="oceania">Oceania</option>
-          </select>
-        </section>
       </header>
 
-      {countryList && notFound == false && (
-        <div
-          className="main_cardContainer"
-          style={
-            darkStyle == true
-              ? {
-                  backgroundColor: typeMode.darkMode.backgroundColor,
-                  color: typeMode.darkMode.color,
-                }
-              : {
-                  backgroundColor: typeMode.lightMode.backgroundColor,
-                  color: typeMode.lightMode.color,
-                }
-          }
-        >
-          {countryList.map((module, index) => {
-            return (
-              <CardComponent
-                dataFunction={dataReciever}
-                key={`component_${index}`}
-                darkMode={darkStyle}
-                image={module.flags.png}
-                name={module.name.common}
-                region={module.region}
-                capital={module.capital}
-                population={module.population}
-              />
-            );
-          })}
-        </div>
+      {countryList && notFound == false && componentSelected == false && (
+        <>
+          <section
+            className="header_inputs"
+            style={
+              darkStyle == true
+                ? { backgroundColor: typeMode.darkMode.backgroundColor }
+                : { backgroundColor: typeMode.lightMode.backgroundColor }
+            }
+          >
+            <input
+              onChange={(e) => {
+                setNameCountry(e.target.value);
+              }}
+              className="inputs_search"
+              style={
+                darkStyle == true
+                  ? {
+                      backgroundColor: typeMode.darkMode.backgroundColor,
+                      color: typeMode.darkMode.color,
+                    }
+                  : {
+                      backgroundColor: typeMode.lightMode.backgroundColor,
+                      color: typeMode.lightMode.color,
+                    }
+              }
+              type="text"
+              placeholder="Search for country..."
+            />
+            <select
+              className="inputs_selection"
+              style={
+                darkStyle == true
+                  ? {
+                      backgroundColor: typeMode.darkMode.backgroundColor,
+                      color: typeMode.darkMode.color,
+                    }
+                  : {
+                      backgroundColor: typeMode.lightMode.backgroundColor,
+                      color: typeMode.lightMode.color,
+                    }
+              }
+              name="Region"
+              onChange={(e) => {
+                setRegion(e.target.value);
+              }}
+            >
+              <option>Filter by region</option>
+              <option value="africa">Africa</option>
+              <option value="america">America</option>
+              <option value="asia">Asia</option>
+              <option value="europe">Europe</option>
+              <option value="oceania">Oceania</option>
+            </select>
+          </section>
+
+          <div
+            className="main_cardContainer"
+            style={
+              darkStyle == true
+                ? {
+                    backgroundColor: typeMode.darkMode.backgroundColor,
+                    color: typeMode.darkMode.color,
+                  }
+                : {
+                    backgroundColor: typeMode.lightMode.backgroundColor,
+                    color: typeMode.lightMode.color,
+                  }
+            }
+          >
+            {countryList?.map((module, index) => {
+              return (
+                <CardComponent
+                  dataFunction={dataReciever}
+                  key={`component_${index}`}
+                  darkMode={darkStyle}
+                  image={module.flags.png}
+                  name={module.name.common}
+                  region={module.region}
+                  capital={module.capital}
+                  population={module.population}
+                />
+              );
+            })}
+          </div>
+        </>
       )}
 
       {notFound == true && (
@@ -245,6 +265,14 @@ const CountryListComponent = () => {
             Pais no encontrado
           </h1>
         </div>
+      )}
+
+      {componentSelected == true && (
+        <CountryDetailComponent
+          dataCountry={countryList}
+          darkMode={darkStyle}
+          dataFunction={recieveBackEvent}
+        />
       )}
     </>
   );
