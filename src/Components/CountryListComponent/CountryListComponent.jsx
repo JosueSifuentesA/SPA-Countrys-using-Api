@@ -25,6 +25,7 @@ const CountryListComponent = () => {
   const [countryList, setCountryList] = useState();
   const [region, setRegion] = useState();
   const [nameCountry, setNameCountry] = useState();
+  const [dataName, setDataName] = useState();
   const [notFound, setNotFound] = useState(false);
   const [componentSelected, setComponentSelected] = useState(false);
 
