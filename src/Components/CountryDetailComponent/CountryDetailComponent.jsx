@@ -12,14 +12,34 @@ const CountryDetailComponent = ({ dataCountry, darkMode, dataFunction }) => {
 
   console.log(country);
 
-  const [componentSelected, setComponentSelected] = useState(false);
+  const listOfLenguajes = [];
+  const listOfCurrencies = [];
+  let listOfBorders = [];
+
+  Object.entries(country.languages).forEach(([keys, values]) => {
+    listOfLenguajes.push(values + " ");
+  });
+
+  Object.entries(country.currencies).forEach(([keys, values]) => {
+    listOfCurrencies.push(values.name);
+  });
+
+  if (country.borders != undefined || country.borders != null) {
+    const bordersLength = Object.entries(country.borders).length;
+
+    for (let i = 0; i < bordersLength; i++) {
+      listOfBorders.push(country.borders[i]);
+    }
+  } else {
+    listOfBorders.push("No borders");
+  }
 
   return (
     <section
       style={
         darkMode == true
           ? { backgroundColor: "hsl(207, 26%, 17%)", color: "white" }
-          : { backgroundColor: "hsl(0, 0%, 100%)", color: "black" }
+          : { backgroundColor: "hsl(0, 0%, 98%)", color: "black" }
       }
       className="detailSection"
     >
@@ -27,7 +47,7 @@ const CountryDetailComponent = ({ dataCountry, darkMode, dataFunction }) => {
         style={
           darkMode == true
             ? { backgroundColor: "hsl(207, 26%, 17%)", color: "white" }
-            : { backgroundColor: "hsl(0, 0%, 100%)", color: "black" }
+            : { backgroundColor: "hsl(0, 0%, 98%)", color: "black" }
         }
         className="detailSection_button"
         onClick={() => {
@@ -72,16 +92,41 @@ const CountryDetailComponent = ({ dataCountry, darkMode, dataFunction }) => {
                 </span>
                 <span>
                   <strong>Currencies : </strong>
-                  {country.currencies?.name}
+                  {listOfCurrencies}
                 </span>
                 <span>
                   <strong>Languages : </strong>
-                  {country.languaje}
+                  {listOfLenguajes}
                 </span>
               </div>
             </div>
           </div>
-          <label>Border Countries</label>
+          <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+            <label>Border Countries</label>
+            {listOfBorders.map((module) => {
+              return (
+                <div
+                  style={
+                    darkMode == true
+                      ? {
+                          backgroundColor: "hsl(209, 23%, 22%)",
+                          color: "white",
+                          padding: "5px 15px",
+                          borderRadius: "10px",
+                        }
+                      : {
+                          backgroundColor: "hsl(0, 0%, 100%)",
+                          color: "black",
+                          padding: "5px 15px",
+                          borderRadius: "10px",
+                        }
+                  }
+                >
+                  {module}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

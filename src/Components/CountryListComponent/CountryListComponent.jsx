@@ -24,6 +24,7 @@ const CountryListComponent = () => {
   const [countryList, setCountryList] = useState();
   const [region, setRegion] = useState();
   const [nameCountry, setNameCountry] = useState();
+
   const [notFound, setNotFound] = useState(false);
   const [componentSelected, setComponentSelected] = useState(false);
 
@@ -32,16 +33,42 @@ const CountryListComponent = () => {
   const [iconSelected, setIconSelected] = useState(iconMoon);
   const [styleModeText, setStyleModeText] = useState("Light Mode");
 
+  /*const callApi = (url) => {
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          resolve(data);
+          setNotFound(false);
+          if (data?.status === 404) {
+            setNotFound(true);
+          } else {
+            setNotFound(false);
+            setCountryList(data);
+          }
+        })
+        .catch((error) => {
+          reject(error);
+          setNotFound(true);
+        });
+    });
+  };*/
+
   const callApi = (url) => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        setNotFound(false);
         if (data?.status === 404) {
           setNotFound(true);
         } else {
           setNotFound(false);
           setCountryList(data);
         }
+      })
+      .catch((error) => {
+        console.error(error);
+        setNotFound(true);
       });
   };
 
@@ -57,7 +84,6 @@ const CountryListComponent = () => {
   }, [region]);
 
   useEffect(() => {
-    console.log(nameCountry);
     if (!nameCountry) return;
     callApi(`https://restcountries.com/v3.1/name/${nameCountry}`);
   }, [nameCountry]);
@@ -205,7 +231,7 @@ const CountryListComponent = () => {
                   }
             }
           >
-            {countryList?.map((module, index) => {
+            {countryList.map((module, index) => {
               return (
                 <CardComponent
                   dataFunction={dataReciever}

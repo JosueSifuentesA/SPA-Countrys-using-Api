@@ -38,8 +38,8 @@
 }
 
 .detailSection {
-  padding: 0px 5%;
-  min-height: 1300px;
+  padding: 0px 5% 15%;
+  /*min-height: 1300px;*/
 }
 
 .stats_container {
