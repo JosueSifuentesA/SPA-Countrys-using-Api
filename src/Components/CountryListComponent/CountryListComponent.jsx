@@ -33,27 +33,6 @@ const CountryListComponent = () => {
   const [iconSelected, setIconSelected] = useState(iconMoon);
   const [styleModeText, setStyleModeText] = useState("Light Mode");
 
-  /*const callApi = (url) => {
-    return new Promise((resolve, reject) => {
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          resolve(data);
-          setNotFound(false);
-          if (data?.status === 404) {
-            setNotFound(true);
-          } else {
-            setNotFound(false);
-            setCountryList(data);
-          }
-        })
-        .catch((error) => {
-          reject(error);
-          setNotFound(true);
-        });
-    });
-  };*/
-
   const callApi = (url) => {
     fetch(url)
       .then((response) => response.json())
@@ -262,6 +241,60 @@ const CountryListComponent = () => {
                 }
           }
         >
+          <section
+            className="header_inputs"
+            style={
+              darkStyle == true
+                ? { backgroundColor: typeMode.darkMode.backgroundColor }
+                : { backgroundColor: typeMode.lightMode.backgroundColor }
+            }
+          >
+            <input
+              onChange={(e) => {
+                setNameCountry(e.target.value);
+              }}
+              className="inputs_search"
+              style={
+                darkStyle == true
+                  ? {
+                      backgroundColor: typeMode.darkMode.backgroundColor,
+                      color: typeMode.darkMode.color,
+                    }
+                  : {
+                      backgroundColor: typeMode.lightMode.backgroundColor,
+                      color: typeMode.lightMode.color,
+                    }
+              }
+              type="text"
+              placeholder="Search for country..."
+            />
+            <select
+              className="inputs_selection"
+              style={
+                darkStyle == true
+                  ? {
+                      backgroundColor: typeMode.darkMode.backgroundColor,
+                      color: typeMode.darkMode.color,
+                    }
+                  : {
+                      backgroundColor: typeMode.lightMode.backgroundColor,
+                      color: typeMode.lightMode.color,
+                    }
+              }
+              name="Region"
+              onChange={(e) => {
+                setRegion(e.target.value);
+              }}
+            >
+              <option>Filter by region</option>
+              <option value="africa">Africa</option>
+              <option value="america">America</option>
+              <option value="asia">Asia</option>
+              <option value="europe">Europe</option>
+              <option value="oceania">Oceania</option>
+            </select>
+          </section>
+
           <h1
             style={
               darkStyle == true
