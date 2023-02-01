@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./countryDetailComponent.css";
 
 const CountryDetailComponent = ({ dataCountry, darkMode, dataFunction }) => {
