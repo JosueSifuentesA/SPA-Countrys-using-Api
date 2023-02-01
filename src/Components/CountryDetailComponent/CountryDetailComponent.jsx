@@ -100,7 +100,14 @@ const CountryDetailComponent = ({ dataCountry, darkMode, dataFunction }) => {
               </div>
             </div>
           </div>
-          <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "20px",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
             <label>Border Countries</label>
             {listOfBorders.map((module) => {
               return (
