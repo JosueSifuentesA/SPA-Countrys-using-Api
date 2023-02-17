@@ -22,6 +22,3 @@ If you have any suggestions or bug reports, please feel free to open an issue on
 # License
 This project is licensed under the MIT License.
 
-Aditional Notes This doesn't have validators in the first step text inputs ,I'm starting in React i will work on it.
-
-MIT
