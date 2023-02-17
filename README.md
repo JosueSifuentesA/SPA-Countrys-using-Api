@@ -1,5 +1,5 @@
 # REST Countries Browser
-This is a web-based browser built with React that allows users to search for countries using the REST Countries API. The browser includes features to view detailed information about a country, as well as toggle between light and dark modes.
+This is a web-based browser built with React that allows users to search for countries using the REST Countries API (https://restcountries.com). The browser includes features to view detailed information about a country, as well as toggle between light and dark modes.
 
 # Live demo
 Look the live version in Vercel https://spa-countrys-using-api.vercel.app
